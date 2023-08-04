@@ -1,0 +1,113 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> plsql_block
+Rule 1     plsql_block -> select_statement
+Rule 2     select_statement -> SELECT identifier_list FROM IDENTIFIER SEMICOLON
+Rule 3     identifier_list -> IDENTIFIER
+Rule 4     identifier_list -> identifier_list , IDENTIFIER
+
+Terminals, with rules where they appear
+
+,                    : 4
+FROM                 : 2
+IDENTIFIER           : 2 3 4
+SELECT               : 2
+SEMICOLON            : 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+identifier_list      : 2 4
+plsql_block          : 0
+select_statement     : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . plsql_block
+    (1) plsql_block -> . select_statement
+    (2) select_statement -> . SELECT identifier_list FROM IDENTIFIER SEMICOLON
+
+    SELECT          shift and go to state 3
+
+    plsql_block                    shift and go to state 1
+    select_statement               shift and go to state 2
+
+state 1
+
+    (0) S' -> plsql_block .
+
+
+
+state 2
+
+    (1) plsql_block -> select_statement .
+
+    $end            reduce using rule 1 (plsql_block -> select_statement .)
+
+
+state 3
+
+    (2) select_statement -> SELECT . identifier_list FROM IDENTIFIER SEMICOLON
+    (3) identifier_list -> . IDENTIFIER
+    (4) identifier_list -> . identifier_list , IDENTIFIER
+
+    IDENTIFIER      shift and go to state 5
+
+    identifier_list                shift and go to state 4
+
+state 4
+
+    (2) select_statement -> SELECT identifier_list . FROM IDENTIFIER SEMICOLON
+    (4) identifier_list -> identifier_list . , IDENTIFIER
+
+    FROM            shift and go to state 6
+    ,               shift and go to state 7
+
+
+state 5
+
+    (3) identifier_list -> IDENTIFIER .
+
+    FROM            reduce using rule 3 (identifier_list -> IDENTIFIER .)
+    ,               reduce using rule 3 (identifier_list -> IDENTIFIER .)
+
+
+state 6
+
+    (2) select_statement -> SELECT identifier_list FROM . IDENTIFIER SEMICOLON
+
+    IDENTIFIER      shift and go to state 8
+
+
+state 7
+
+    (4) identifier_list -> identifier_list , . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 9
+
+
+state 8
+
+    (2) select_statement -> SELECT identifier_list FROM IDENTIFIER . SEMICOLON
+
+    SEMICOLON       shift and go to state 10
+
+
+state 9
+
+    (4) identifier_list -> identifier_list , IDENTIFIER .
+
+    FROM            reduce using rule 4 (identifier_list -> identifier_list , IDENTIFIER .)
+    ,               reduce using rule 4 (identifier_list -> identifier_list , IDENTIFIER .)
+
+
+state 10
+
+    (2) select_statement -> SELECT identifier_list FROM IDENTIFIER SEMICOLON .
+
+    $end            reduce using rule 2 (select_statement -> SELECT identifier_list FROM IDENTIFIER SEMICOLON .)
+
