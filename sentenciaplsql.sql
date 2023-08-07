@@ -1,41 +1,52 @@
--- PL/SQL Block
+-- PL/SQL BLOCK
 BEGIN
 
-  vncontador := 0;
+  VNCONTADOR := 0;
 
-  aocrespro := '0';
-  aocmenerr := NULL;
+  AOCRESPRO := '0';
+  AOCMENERR := NULL;
+
+ SELECT COUNT(*)
+  INTO VNCONTADOR
+  FROM ESQUEMA.TABLA0 WHERE CODOPEREC = AINCODOPEREC
+    AND SECREC    = AINSECREC;
+    --AND CODFUN    = TO_CHAR(AICCODFUN);
 
   SELECT COUNT(*)
-  INTO vncontador
-  FROM tabla1
-  WHERE CODOPEREC = aincodoperec
-    AND SECREC    = ainsecrec;
-    --AND CODFUN    = to_char(aiccodfun);
+  INTO VNCONTADOR
+  FROM TABLA1
+  WHERE CODOPEREC = AINCODOPEREC
+    AND SECREC    = AINSECREC;
+    --AND CODFUN    = TO_CHAR(AICCODFUN);
 
-  IF vncontador = 0 THEN
-    aocmenerr := 'La operacion ' || ainsecrec || ' no esta registrada en el sistema' ;
+  IF VNCONTADOR = 0 THEN
+    AOCMENERR := 'LA OPERACION ' || AINSECREC || ' NO ESTA REGISTRADA EN EL SISTEMA' ;
       RETURN;
   END IF;
 
   SELECT COUNT(*)
-  INTO vncontador
-  FROM tabla2, tabla3
-  WHERE CODOPEREC = aincodoperec
-    AND SECREC    = ainsecrec
+  INTO VNCONTADOR
+  FROM TABLA2, ESQUEMA.TABLA3
+  WHERE CODOPEREC = AINCODOPEREC
+    AND SECREC    = AINSECREC
     AND ESTOPE    = 'ANU';
 
-for ind in (select * from tabla4)
-loop
-end loop
+FOR IND IN (SELECT * FROM TABLA4 )
+LOOP
+END LOOP
 
-select * into v from tabla5 as t5;
+SELECT * INTO V FROM TABLA5 AS T5;
 
 
-  IF vncontador = 1 THEN
-    aocmenerr := 'La operacion ' ||
+  IF VNCONTADOR = 1 THEN
+    AOCMENERR := 'LA OPERACION ' ||
 
-select * into v from tabla6 joint tabla7;
+SELECT * INTO V FROM TABLA6 JOINT TABLA7;
 
-select (select c1 from tabla8), c2 into v from tabla9;
+SELECT (SELECT C1 FROM TABLA8) , C2 INTO V FROM TABLA9;
+
+SELECT * INTO V FROM TABLA10 ;
+
+SELECT * INTO V FROM TABLA11;
+SELECT C1 FROM TABLA12;
 
