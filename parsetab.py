@@ -27,8 +27,8 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> plsql_block","S'",1,None,None,None),
-  ('plsql_block -> select_statement','plsql_block',1,'p_plsql_block','analizarSQL1.py',12),
-  ('select_statement -> SELECT identifier_list FROM IDENTIFIER SEMICOLON','select_statement',5,'p_select_statement','analizarSQL1.py',16),
-  ('identifier_list -> IDENTIFIER','identifier_list',1,'p_identifier_list','analizarSQL1.py',20),
-  ('identifier_list -> identifier_list , IDENTIFIER','identifier_list',3,'p_identifier_list','analizarSQL1.py',21),
+  ('plsql_block -> select_statement','plsql_block',1,'p_plsql_block','analizar5.py',8),
+  ('select_statement -> SELECT identifier_list FROM IDENTIFIER SEMICOLON','select_statement',5,'p_select_statement','analizar5.py',12),
+  ('identifier_list -> IDENTIFIER','identifier_list',1,'p_identifier_list','analizar5.py',16),
+  ('identifier_list -> identifier_list , IDENTIFIER','identifier_list',3,'p_identifier_list','analizar5.py',17),
 ]
